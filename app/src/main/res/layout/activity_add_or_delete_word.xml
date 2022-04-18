@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+    <variable
+        name="viewModelAddOrDelete"
+        type="com.example.wordapp.ui.main.viewModel.AddOrDeleteWordViewModel" />
+  </data>
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+      <com.google.android.material.card.MaterialCardView
+          android:id="@+id/crdWord"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          app:cardCornerRadius="10dp"
+          app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical">
+
+          <com.google.android.material.textfield.TextInputLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="10dp"
+              android:id="@+id/txt_Lyt_Word"
+              android:hint="@string/hint_word">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txt_Edt_Word"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={viewModelAddOrDelete.wordEditText}"/>
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <androidx.appcompat.widget.AppCompatButton
+              android:id="@+id/btn_Update"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/txt_Lyt_Word"
+              android:text="@string/word_Update">
+          </androidx.appcompat.widget.AppCompatButton>
+
+          <androidx.appcompat.widget.AppCompatButton
+              android:id="@+id/btn_Save"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/txt_Lyt_Word"
+              android:text="@string/word_Save">
+          </androidx.appcompat.widget.AppCompatButton>
+
+        </RelativeLayout>
+
+      </com.google.android.material.card.MaterialCardView>
+
+      <com.google.android.material.card.MaterialCardView
+          android:id="@+id/crdDefinition"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          app:cardCornerRadius="10dp"
+          app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical">
+
+          <Spinner
+              android:id="@+id/spin"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:layout_marginBottom="10dp"
+              android:selectedItemPosition="@={viewModelAddOrDelete.spinnerPartsOfSpeech}">
+
+          </Spinner>
+
+          <com.google.android.material.textfield.TextInputLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/txt_Lyt_Definition"
+              android:layout_below="@id/spin"
+              android:layout_marginBottom="10dp"
+              android:hint="@string/hint_Definition">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Definition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={viewModelAddOrDelete.definition_EditText}"/>
+          </com.google.android.material.textfield.TextInputLayout>
+
+
+          <com.google.android.material.textfield.TextInputLayout
+              android:id="@+id/txt_Lyt_Definition_translate"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/txt_Lyt_Definition"
+              android:layout_marginBottom="10dp"
+              android:hint="@string/hint_translate">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Definition_translate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={viewModelAddOrDelete.definition_translate_EditText}" />
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <androidx.appcompat.widget.AppCompatButton
+              android:id="@+id/btn_DefinitionUpdate"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/txt_Lyt_Definition_translate"
+              android:text="@string/word_Update">
+          </androidx.appcompat.widget.AppCompatButton>
+
+          <androidx.appcompat.widget.AppCompatButton
+              android:id="@+id/btn_DefinitionSave"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/txt_Lyt_Definition_translate"
+              android:text="@string/word_Save">
+
+          </androidx.appcompat.widget.AppCompatButton>
+
+
+        </RelativeLayout>
+
+
+
+      </com.google.android.material.card.MaterialCardView>
+
+      <com.google.android.material.card.MaterialCardView
+          android:id="@+id/crdDefinitions"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          app:cardCornerRadius="10dp"
+          app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:padding="5dp"
+            android:orientation="vertical">
+
+          <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/recyclerviewDef"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+              tools:listitem="@layout/recyclerview_item" />
+
+          <com.google.android.material.floatingactionbutton.FloatingActionButton
+              android:id="@+id/fabDef"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentRight="true"
+              android:layout_alignParentBottom="true"
+              android:layout_marginStart="@dimen/big_margin"
+              android:layout_marginTop="@dimen/big_margin"
+              android:layout_marginEnd="@dimen/big_margin"
+              android:layout_marginBottom="@dimen/big_margin"
+              android:contentDescription="@string/add_word"
+              android:src="@drawable/ic_add_black_24dp" />
+        </RelativeLayout>
+
+      </com.google.android.material.card.MaterialCardView>
+
+
+      <com.google.android.material.card.MaterialCardView
+          android:id="@+id/crdvoice"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          app:cardCornerRadius="10dp"
+          app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical">
+
+          <RadioGroup
+              android:id="@+id/voice"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:checkedButton="@+id/active">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+              <RadioButton
+                  android:id="@+id/active"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:text="Active"
+                  android:layout_weight="1"
+                  android:padding="5dp"/>
+
+              <RadioButton
+                  android:id="@+id/passive"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:text="Passive"
+                  android:layout_weight="1"
+                  android:padding="5dp"/>
+
+            </LinearLayout>
+
+
+
+          </RadioGroup>
+
+
+
+
+
+
+        </RelativeLayout>
+
+
+
+      </com.google.android.material.card.MaterialCardView>
+
+      <com.google.android.material.card.MaterialCardView
+          android:id="@+id/crdTense"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          app:cardCornerRadius="10dp"
+          app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical">
+
+          <RadioGroup
+              android:id="@+id/rdoTense"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:checkedButton="@+id/past">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+              <RadioButton
+                  android:id="@+id/past"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:text="Past"
+                  android:layout_weight="1"
+                  android:padding="5dp"/>
+
+              <RadioButton
+                  android:id="@+id/present"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:text="Present"
+                  android:layout_weight="1"
+                  android:padding="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+              <RadioButton
+                  android:id="@+id/future"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:text="Future"
+                  android:layout_weight="1"
+                  android:padding="5dp"/>
+            </LinearLayout>
+
+
+
+          </RadioGroup>
+
+
+
+
+
+
+        </RelativeLayout>
+
+
+
+      </com.google.android.material.card.MaterialCardView>
+
+
+      <com.google.android.material.card.MaterialCardView
+          android:id="@+id/crdAspects"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          app:cardCornerRadius="10dp"
+          app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical">
+
+          <RadioGroup
+              android:id="@+id/rdoAspects"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:checkedButton="@+id/simple">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+              <RadioButton
+                  android:id="@+id/simple"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:text="Simple"
+                  android:layout_weight="1"
+                  android:padding="5dp"/>
+
+              <RadioButton
+                  android:id="@+id/continuous"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:text="Continuous"
+                  android:layout_weight="1"
+                  android:padding="5dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+              <RadioButton
+                  android:id="@+id/perfect_simple"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:text="Perfect simple"
+                  android:layout_weight="1"
+
+                  android:padding="5dp"/>
+              <RadioButton
+                  android:id="@+id/perfect_continuous"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:text="Perfect continuous"
+                  android:layout_weight="1"
+                  android:padding="5dp"/>
+
+            </LinearLayout>
+
+          </RadioGroup>
+
+
+
+
+        </RelativeLayout>
+
+      </com.google.android.material.card.MaterialCardView>
+
+      <com.google.android.material.card.MaterialCardView
+          android:id="@+id/crdSentenceType"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          app:cardCornerRadius="10dp"
+          app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical">
+
+          <RadioGroup
+              android:id="@+id/rdoSentenceType"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:checkedButton="@+id/Affirmative">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+              <RadioButton
+                  android:id="@+id/Affirmative"
+                  android:text="Affirmative"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:padding="5dp"/>
+
+              <RadioButton
+                  android:id="@+id/Negative"
+                  android:text="Negative"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:padding="5dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+              <RadioButton
+                  android:id="@+id/Question"
+                  android:text="Question"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+
+                  android:padding="5dp"/>
+              <RadioButton
+                  android:id="@+id/Interrogative"
+                  android:text="Interrogative"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:padding="5dp"/>
+
+            </LinearLayout>
+
+          </RadioGroup>
+
+        </RelativeLayout>
+
+      </com.google.android.material.card.MaterialCardView>
+
+      <com.google.android.material.card.MaterialCardView
+          android:id="@+id/crdSentence"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          app:cardCornerRadius="10dp"
+          app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical">
+
+
+          <com.google.android.material.textfield.TextInputLayout
+              android:id="@+id/txt_Lyt_Sentence"
+              android:hint="Sentence..."
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Sentence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={viewModelAddOrDelete.sentence_EditText}"/>
+          </com.google.android.material.textfield.TextInputLayout>
+
+
+          <com.google.android.material.textfield.TextInputLayout
+              android:id="@+id/txt_Lyt_Sentence_Translate"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/txt_Lyt_Sentence"
+              android:layout_marginBottom="10dp"
+              android:hint="@string/hint_translate">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Sentence_Translate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={viewModelAddOrDelete.sentence_translate_EditText}" />
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <androidx.appcompat.widget.AppCompatButton
+              android:id="@+id/btn_SentenceUpdate"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/txt_Lyt_Sentence_Translate"
+              android:text="@string/word_Update">
+          </androidx.appcompat.widget.AppCompatButton>
+
+          <androidx.appcompat.widget.AppCompatButton
+              android:id="@+id/btn_SentenceSave"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/txt_Lyt_Sentence_Translate"
+              android:text="@string/word_Save">
+
+          </androidx.appcompat.widget.AppCompatButton>
+
+
+        </RelativeLayout>
+
+
+
+      </com.google.android.material.card.MaterialCardView>
+
+      <com.google.android.material.card.MaterialCardView
+          android:id="@+id/crdSentences"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          app:cardCornerRadius="10dp"
+          app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:padding="5dp"
+            android:orientation="vertical">
+
+          <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/recyclerviewSentence"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+              tools:listitem="@layout/recyclerview_item" />
+
+          <com.google.android.material.floatingactionbutton.FloatingActionButton
+              android:id="@+id/fabSentence"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="@dimen/big_margin"
+              android:layout_marginTop="@dimen/big_margin"
+              android:layout_marginEnd="@dimen/big_margin"
+              android:layout_marginBottom="@dimen/big_margin"
+              android:contentDescription="@string/add_word"
+              android:src="@drawable/ic_add_black_24dp"
+              android:layout_alignParentBottom="true"
+              android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+      </com.google.android.material.card.MaterialCardView>
+
+
+
+    </LinearLayout>
+
+
+
+
+  </ScrollView>
+</layout>
